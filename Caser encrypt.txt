@@ -1,0 +1,16 @@
+p=input("enter the plaintext:")
+list=[]
+plaintext=[]
+for i in range(97,123):
+    list.append(chr(i))
+k=[]
+for j in list:
+    k.append(list.index(j))
+for i in p:
+    if i in list:
+        plaintext.append(list.index(i))
+print("cipher text:")
+cipher=[x+1 for x in plaintext]
+for m in cipher:
+    if m in k:
+        print(list[m],end=" ")

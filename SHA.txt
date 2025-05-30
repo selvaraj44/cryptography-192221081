@@ -1,0 +1,5 @@
+import hashlib
+str = input(" enter the message:")
+result = hashlib.sha1(str.encode())
+print("The hexadecimal equivalent of SHA3is : ")
+print(result.hexdigest())

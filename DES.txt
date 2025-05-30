@@ -1,0 +1,31 @@
+from Crypto.Cipher import DES
+
+def pad_text(text):
+    pad_length = 8 - (len(text) % 8)
+    padding = chr(pad_length) * pad_length
+    return text + padding
+
+def remove_padding(text):
+    pad_length = ord(text[-1])
+    return text[:-pad_length]
+
+def encrypt(key, plaintext):
+    cipher = DES.new(key, DES.MODE_ECB)
+    padded_plaintext = pad_text(plaintext)
+    ciphertext = cipher.encrypt(padded_plaintext.encode())
+    return ciphertext.hex()
+
+def decrypt(key, ciphertext):
+    cipher = DES.new(key, DES.MODE_ECB)
+    decrypted_text = cipher.decrypt(bytes.fromhex(ciphertext)).decode()
+    return remove_padding(decrypted_text)
+
+# Example usage
+key = b'abcdefgh'
+plaintext = "Hello, World!"
+ciphertext = encrypt(key, plaintext)
+decrypted_text = decrypt(key, ciphertext)
+
+print("Plaintext:", plaintext)
+print("Ciphertext:", ciphertext)
+print("Decrypted text:", decrypted_text)

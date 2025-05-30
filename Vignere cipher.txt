@@ -1,0 +1,12 @@
+letter= "abcdefghijklmnopqrstuvwxyz"
+k= str(input("enter the key: "))
+p= str(input("enter the string: "))
+c= ""
+for i in range(len(p)):
+    index = letter.index(p[i])
+    k_index = i % len(k)
+    k_char = k[k_index]
+    k_letter_index = letter.index(k_char)
+    c_index = (index +k_letter_index) % 26
+    c+= letter[c_index]
+print("cipher text is: ",c)
