@@ -1,0 +1,22 @@
+import numpy as np
+
+def get_key_matrix(key):
+    key_matrix = np.zeros((3, 3), dtype=int)
+    k = 0
+    for i in range(3):
+        for j in range(3):
+            key_matrix[i][j] = ord(key[k]) % 65
+            k += 1
+    return key_matrix
+
+def encrypt(message, key):
+    key_matrix = get_key_matrix(key)
+    message_vector = np.array([[ord(char) % 65] for char in message])
+    cipher_matrix = np.dot(key_matrix, message_vector) % 26
+    ciphertext = ''.join([chr(int(num) + 65) for num in cipher_matrix.flatten()])
+    return ciphertext
+
+message = "DOG"
+key = "YHGINUKER"  # Must be 9 letters for 3x3
+ciphertext = encrypt(message, key)
+print("Ciphertext:", ciphertext)
