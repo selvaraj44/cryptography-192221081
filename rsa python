@@ -1,0 +1,30 @@
+def gcd(a, b):
+    while b != 0:
+        a, b = b, a % b
+    return a
+def modInverse(e, phi):
+    for d in range(2, phi):
+        if (d * e) % phi == 1:
+            return d
+    return None
+p = 11
+q = 13
+
+n = p * q
+phi = (p - 1) * (q - 1)
+e = 7
+if gcd(e, phi) != 1:
+    raise ValueError("e and phi are not coprime!")
+d = modInverse(e, phi)
+
+print("Public key:", (n, e))
+print("Private key:", (n, d))
+
+message = 9
+print("Original message:", message)
+cipher = pow(message, e, n)
+print("Encrypted message:", cipher)
+
+# Decryption: m = (c^d) mod n
+decrypted = pow(cipher, d, n)
+print("Decrypted message:", decrypted)
