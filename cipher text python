@@ -1,0 +1,12 @@
+
+text = input("Enter a message: ")
+k = int(input("Enter the key (1-25): "))
+encrypted = ""
+for char in text:
+    if char.isalpha(): 
+        base = ord('A') if char.isupper() else ord('a')
+        encrypted += chr((ord(char) - base + k) % 26 + base)
+    else:
+        encrypted += char  # keep spaces/punctuation as is
+
+print("Encrypted message:", encrypted)
